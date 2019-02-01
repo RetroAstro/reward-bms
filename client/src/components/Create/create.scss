@@ -1,0 +1,306 @@
+.create {
+  color: rgba(0, 0, 0, 0.65);
+
+  & .header {
+    height: 70px;
+    position: relative;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    margin-bottom: 30px;
+
+    & .middle {
+      min-width: 1200px;
+      width: 95%;
+
+      & .create-name {
+        font-size: 26px;
+        font-weight: 550;
+        color: #34495e;
+      }
+
+      & .save-btn {
+        width: 116px;
+        height: 35px;
+        border-radius: 6px;
+        border: 1px solid #d9d9d9;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        & > span {
+          font-size: 16px;
+        }
+
+        &:hover {
+          color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+  }
+
+  & .main {
+    position: relative;
+    margin: auto;
+    width: 960px;
+    margin-bottom: 40px;
+
+    & .nav {
+      height: 80px;
+      background-color: #fff;
+      box-shadow: rgba(0, 21, 41, 0.12) 0 1px 2px;
+      border-radius: 3px;
+      padding: 0 20px;
+      margin-bottom: 30px;
+
+      & .nav-left {
+        width: 420px;
+        height: 35px;
+
+        & .ac-name {
+          font-size: 17px;
+          margin-right: 50px;
+        }
+
+        & .ac-ipt {
+          width: 240px;
+          height: 35px;
+          padding: 12px;
+          box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+          border-radius: 4px;
+          transition: all 0.3s ease-in-out;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.65);
+
+          &:focus {
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $info;
+          }
+        }
+      }
+
+      & .nav-right {
+        width: 100px;
+        height: 35px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        & > span {
+          font-size: 16px;
+        }
+
+        &:hover {
+          color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+
+    & .type-box-list {
+      position: relative;
+
+      & .type-box {
+        width: 100%;
+        background-color: #fff;
+        box-shadow: rgba(0, 21, 41, 0.12) 0 1px 2px;
+        border-radius: 3px;
+        padding: 20px;
+        margin-bottom: 30px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        & .award-type {
+          position: relative;
+
+          & .type {
+            font-size: 17px;
+            font-weight: 550;
+            color: rgba(102, 175, 233, 0.8);
+          }
+        }
+
+        & .award-name {
+          margin-top: 60px;
+
+          & .name {
+            font-size: 17px;
+            margin-right: 50px;
+          }
+
+          & .name-ipt {
+            width: 240px;
+            height: 35px;
+            border-radius: 4px;
+            box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+            padding: 12px;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.65);
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $info;
+            }
+          }
+        }
+
+        & .upload {
+          margin-top: 60px;
+
+          & .name {
+            font-size: 17px;
+            margin-right: 50px;
+          }
+
+          & .upload-btn {
+            width: 100px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: #40a9ff;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+            letter-spacing: 1px;
+
+            &.disabled {
+              opacity: 1;
+              user-select: none;
+              pointer-events: none;
+            }
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+
+          & .file-ipt {
+            display: none;
+          }
+        }
+
+        & .publish {
+          margin-top: 60px;
+
+          & .name {
+            font-size: 17px;
+          }
+
+          & .pub-area {
+            margin-top: 25px;
+            width: 420px;
+            height: 200px;
+            resize: none;
+            border-radius: 4px;
+            box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+            padding: 12px;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.65);
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $info;
+            }
+          }
+        }
+
+        & .delete {
+          position: relative;
+          margin-top: 40px;
+
+          & .del {
+            width: 100px;
+            height: 35px;
+            border-radius: 6px;
+            border: 1px solid #d9d9d9;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            & > span {
+              font-size: 16px;
+            }
+
+            &:hover {
+              color: #40a9ff;
+              border-color: #40a9ff;
+            }
+          }
+        }
+      }
+    }
+
+    & .qr-create {
+      margin-top: 40px;
+
+      & .qr-btn {
+        width: 130px;
+        height: 40px;
+        border-radius: 6px;
+        background: $info;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        & > span {
+          color: #fff;
+          font-size: 18px;
+          letter-spacing: 2px;
+        }
+      }
+    }
+
+    .choose {
+      opacity: 0;
+      visibility: hidden;
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .choose-box {
+        width: 500px;
+        height: 200px;
+        border-radius: 6px;
+        background: #fff;
+        padding: 20px;
+
+        & .title {
+          text-align: center;
+          font-size: 20px;
+          color: rgba(0, 0, 0, 0.65);
+          flex: 2;
+        }
+
+        & .type-wrap {
+          width: 100%;
+          padding: 0 30px;
+          padding-top: 30px;
+          flex: 8;
+
+          & > div {
+            width: 150px;
+            height: 45px;
+            border-radius: 4px;
+            background: $info;
+            opacity: 0.7;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-size: 19px;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

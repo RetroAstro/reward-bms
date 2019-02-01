@@ -1,0 +1,113 @@
+{
+  "name": "awarder",
+  "version": "1.0.0",
+  "description": "award background management system",
+  "author": "RetroAstro",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config client/webpack/webpack.config.dev.js",
+    "build": "npm run clean && cross-env NODE_ENV=production node client/webpack/build.js",
+    "clean": "rimraf client/dist",
+    "lint": "eslint --ext .js --ext .jsx -- . ",
+    "lint-fix": "eslint --ext .js --ext .jsx --fix -- . ",
+    "lint-scss": "stylelint client/src/**/*.scss",
+    "lint-scss-fix": "stylelint client/src/**/*.scss --fix",
+    "server": "nodemon server/index.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "client/src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "server/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "client/src/**/*.scss": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "classnames": "^2.2.6",
+    "html2canvas": "^1.0.0-alpha.12",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-csrf": "^3.0.6",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.0",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.3.13",
+    "qrcode": "^1.3.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-loadable": "^5.5.0",
+    "react-router-dom": "^4.3.1",
+    "unstated": "^2.1.1",
+    "xlsx": "^0.14.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
+    "autoprefixer": "^9.3.1",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "chalk": "^2.4.1",
+    "compression-webpack-plugin": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.18.7",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "ora": "^3.0.0",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.15.2",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "sass-resources-loader": "^2.0.0",
+    "style-loader": "^0.23.1",
+    "stylelint": "^9.8.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.4.0",
+    "terser-webpack-plugin": "^1.1.0",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 5 versions",
+    "not ie <= 10",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard"],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "rules": {
+    "jsx-quotes": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "camelcase": "off"
+  }
+}

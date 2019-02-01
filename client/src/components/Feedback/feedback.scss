@@ -1,0 +1,294 @@
+.feedback {
+  color: rgba(0, 0, 0, 0.65);
+
+  & .header {
+    height: 70px;
+    position: relative;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    margin-bottom: 30px;
+    z-index: 22;
+
+    & .middle {
+      min-width: 1200px;
+      width: 95%;
+
+      & .left-side {
+        & .ac-name {
+          margin-right: 80px;
+
+          & > span {
+            font-size: 26px;
+            font-weight: 550;
+            color: #34495e;
+          }
+        }
+
+        & .slider {
+          width: 130px;
+          height: 35px;
+          border-radius: 4px;
+          box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+          position: relative;
+          padding: 0 10px;
+          transform: translateY(2px);
+          font-size: 16px;
+
+          & .selected {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+          }
+
+          & .basic {
+            position: absolute;
+            left: 0;
+            top: 35.5px;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 108px;
+
+            & .opt-wrap {
+              transform: translateY(-108px);
+              border-radius: 4px;
+              background: #fff;
+              box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+              transition: all 0.3s ease-in-out;
+              visibility: hidden;
+
+              &.active {
+                transform: translateY(0);
+                visibility: visible;
+              }
+
+              & .option {
+                height: 36px;
+                padding: 8px 10px;
+                overflow: hidden;
+                cursor: pointer;
+
+                &:hover {
+                  background: rgba(102, 175, 233, 0.3);
+                }
+              }
+
+              & .line1 {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 35px;
+                width: 120px;
+                height: 2px;
+                box-shadow: inset 0 4px 4px -4px rgba(102, 175, 233, 0.6);
+              }
+
+              & .line2 {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 72px;
+                width: 120px;
+                height: 2px;
+                box-shadow: inset 0 4px 4px -4px rgba(102, 175, 233, 0.6);
+              }
+            }
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            right: 8px;
+            top: 13px;
+            width: 0;
+            height: 0;
+            border-radius: 4px;
+            border-top: 10px solid rgba(102, 175, 233, 0.6);
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid transparent;
+          }
+        }
+      }
+
+      & .back {
+        width: 116px;
+        height: 35px;
+        border-radius: 6px;
+        border: 1px solid #d9d9d9;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        & > span {
+          font-size: 16px;
+        }
+
+        &:hover {
+          color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+  }
+
+  & .feed {
+    position: relative;
+    margin: auto;
+    width: 1120px;
+    height: 670px;
+    background-color: #fff;
+    box-shadow: rgba(0, 21, 41, 0.12) 0 1px 2px;
+    border-radius: 3px;
+    padding: 25px;
+    z-index: 10;
+    margin-bottom: 40px;
+    font-size: 14px;
+
+    & .feed-nav {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: 40px;
+      background: #fafafa;
+
+      & > div {
+        border: 1px solid #ebeef5;
+        border-right: 0;
+      }
+
+      & > div:last-child {
+        border-right: 1px solid #ebeef5;
+      }
+    }
+
+    & .table-box {
+      width: 100%;
+      height: 530px;
+      position: relative;
+
+      & .table-list {
+        width: 100%;
+        height: 100%;
+
+        & .table-row {
+          display: grid;
+          grid-template-columns: repeat(9, 1fr);
+          grid-template-rows: 40px;
+
+          & > div {
+            border: 1px solid #ebeef5;
+            border-right: 0;
+            border-top: 0;
+          }
+
+          & > div:last-child {
+            border-right: 1px solid #ebeef5;
+          }
+        }
+      }
+    }
+
+    & .pagination {
+      width: 100%;
+      margin-top: 10px;
+
+      & .page-wrap {
+        position: relative;
+
+        & > li {
+          width: 40px;
+          height: 40px;
+          border: 1px solid #ebeef5;
+          border-radius: 4px;
+          margin-left: 10px;
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid $info;
+            color: $info;
+            transition: all 0.3s ease-in-out;
+          }
+
+          &.active {
+            border: 1px solid $info;
+            color: $info;
+          }
+        }
+
+        & .eli {
+          border: 0;
+
+          &:hover {
+            border: 0;
+          }
+
+          & > span {
+            width: 25px;
+            height: 25px;
+            background-image: url('../../assets/eli.png');
+          }
+        }
+
+        & .l-arrow {
+          transition: all 0.3s ease-in-out;
+
+          & > span {
+            width: 11px;
+            height: 11px;
+            border-top: 2px solid #bfbfbf;
+            border-right: 2px solid #bfbfbf;
+            transform: rotate(-135deg) translate(-1px, 1px);
+          }
+
+          &:hover > span {
+            border-top: 2px solid $info;
+            border-right: 2px solid $info;
+          }
+        }
+
+        & .r-arrow {
+          transition: all 0.3s ease-in-out;
+
+          & > span {
+            width: 11px;
+            height: 11px;
+            border-top: 2px solid #bfbfbf;
+            border-right: 2px solid #bfbfbf;
+            transform: rotate(45deg) translate(-1px, 2px);
+          }
+
+          &:hover > span {
+            border-top: 2px solid $info;
+            border-right: 2px solid $info;
+          }
+        }
+      }
+    }
+  }
+
+  & .export-wrap {
+    width: 1120px;
+    margin: auto;
+    margin-bottom: 40px;
+
+    & .export {
+      width: 100px;
+      height: 40px;
+      border-radius: 4px;
+      background-color: $info;
+      opacity: 0.6;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      & > span {
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

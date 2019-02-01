@@ -1,0 +1,63 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  outline: none;
+  appearance: none;
+  border: none;
+}
+
+body, html {
+  width: 100%;
+  min-height: 100%;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: #1f2f3d;
+  background-color: #f4f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+a {
+  color: #555;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+input, textarea, select, button {
+  font: 14px Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+html {
+  position: relative;
+  overflow-x: hidden;
+}
