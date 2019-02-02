@@ -1,5 +1,5 @@
 import axios from 'axios'
-import QRcode from 'qrcode'
+import hash from 'hash.js'
 import bus from '@utils/bus'
 import local from '@utils/local'
 
@@ -13,10 +13,17 @@ const createForm = data => {
 }
 
 export const requestLogin = data => {
+  var result = hash
+    .sha256()
+    .update('redrock' + data.password)
+    .digest('hex')
   return axios({
     method: 'POST',
     url: '/accept_prize/login',
-    data: data
+    data: createForm({
+      username: data.username,
+      password: result
+    })
   })
 }
 
@@ -57,17 +64,28 @@ export const fetchtoLocal = async () => {
         type: '非指定类型'
       }))
     }))
-  var data = temps
-    .concat(res.data.data
-      .filter(item => item.status !== 2)
-      .map(item => ({
-        actid: item.actid,
-        acname: item.actname,
-        status: item.status,
-        qrurls: item.urls
-      })))
-  local.setLocal('dataList', data)
-  bus.emit('renderInitialList', data)
+  var actives = res.data.data.filter(item => item.status === 1)
+  var qrData = actives
+    .map(item => ({
+      acname: item.actname,
+      qrlist: item.urls
+        .map(item => ({
+          url: item.url,
+          prize: item.reward
+        }))
+    }))
+  var listData = temps
+    .concat(
+      actives
+        .map(item => ({
+          actid: item.actid,
+          acname: item.actname,
+          status: item.status
+        }))
+    )
+  local.setLocal('dataList', listData)
+  local.setLocal('qrcodeList', qrData)
+  bus.emit('renderInitialList', listData)
 }
 
 export const saveEdit = data => {
@@ -126,42 +144,31 @@ export const createAct = async data => {
     typeB: typeB
   })
   var res = await instance.post('/accept_prize/specifiedAct', data)
-  var result = await Promise.all(
-    Object.entries(res.data.aactID)
-      .map(([key, value]) => (async () => {
-        var url = await QRcode
-          .toDataURL(`https://wx.idsbllp.cn/game/api/index.php?redirect=http://zblade.top/accept_prize/getPrizeA/${res.data.actid}/${value}`)
-        return {
-          url,
+  var result = Object.entries(res.data.aactID)
+    .map(([key, value]) => ({
+      url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://zblade.top/accept_prize/getPrizeA/${res.data.actid}/${value}`,
+      prize: key,
+      acname: data.acname,
+      type: '指定类型'
+    }))
+    .concat(
+      Object.entries(res.data.bactID)
+        .map(([key, value]) => ({
+          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://axrsqx.natappfree.cc/getPrizeB/${res.data.actid}/${value}`,
           prize: key,
           acname: data.acname,
-          type: '指定类型'
-        }
-      })())
-      .concat(
-        Object.entries(res.data.bactID)
-          .map(([key, value]) => (async () => {
-            var url = await QRcode
-              .toDataURL(`https://wx.idsbllp.cn/game/api/index.php?redirect=http://axrsqx.natappfree.cc/getPrizeB/${res.data.actid}/${value}`)
-            return {
-              url,
-              prize: key,
-              acname: data.acname,
-              type: '非指定类型'
-            }
-          })())
-      )
-  )
+          type: '非指定类型'
+        }))
+    )
   var acturls = result.map(item => ({
     url: item.url,
     reward: item.prize
   }))
   var sendData = JSON.stringify({
+    token: local.getLocal('token'),
     actid: res.data.actid,
-    acturl: acturls,
-    token: local.getLocal('token')
+    acturls: acturls
   })
-  console.log(sendData)
   await instance.post('/accept_prize/addActUrl', sendData)
   return result
 }

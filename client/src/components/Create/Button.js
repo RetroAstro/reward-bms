@@ -15,7 +15,6 @@ class Button extends Component {
       var repeat = list.some(item => item.acname === bus.data.acname && item.status === 1)
       return repeat
     }
-
     const isFull = () => {
       var check = this.ts
         .every(t => bus.data[`${t}list`]
@@ -26,7 +25,6 @@ class Button extends Component {
 
       return bus.data.acname && check
     }
-
     if (isRepeat()) {
       alert('该活动已被创建！')
       return false

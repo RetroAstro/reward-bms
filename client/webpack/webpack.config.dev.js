@@ -16,7 +16,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     host: 'localhost',
     hot: true,
     compress: true,
-    // open: true,
+    open: true,
     quiet: true,
     disableHostCheck: true,
     // historyApiFallback: true,

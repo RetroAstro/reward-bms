@@ -9,8 +9,17 @@ class Submit extends Component {
     const { submit } = this.props
     if (this.orz.value === '') this.orz_err.classList.add('active')
     if (this.psw.value === '') this.psw_err.classList.add('active')
-    this.orz.value && this.psw.value && submit.login(`username=${this.orz.value}&password=${this.psw.value}`)
+    this.orz.value && this.psw.value && submit.login({
+      username: this.orz.value,
+      password: this.psw.value
+    })
     setTimeout(() => this.setState({ status: true }), 300)
+  }
+  componentDidMount () {
+    window.onkeyup = e => e.keyCode === 13 ? this.handleSubmit() : null
+  }
+  componentWillUnmount () {
+    window.onkeyup = null
   }
   componentDidUpdate () {
     var { submit, history } = this.props

@@ -29,6 +29,10 @@ class Upload extends Component {
         })
       }, mark)
     }
+    formatData (data) {
+      console.log(data)
+      return data
+    }
     readFile = (e) => {
       var file = e.target.files[0]
       var arr = file.name.split('.')
@@ -42,7 +46,10 @@ class Upload extends Component {
         var wb = Xlsx.read(result, { type: 'binary' })
         this.setState({
           status: '已上传',
-          list: Xlsx.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]),
+          list: this.formatData(
+            Xlsx.utils
+              .sheet_to_json(wb.Sheets[wb.SheetNames[0]])
+          ),
           flag: false
         })
       })

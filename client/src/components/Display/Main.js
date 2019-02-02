@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Subscribe } from 'unstated'
+import QRcode from 'qrcode'
 import AcBox from './AcBox'
 import Save from '../../common/Save'
 import bus from '@utils/bus'
@@ -18,9 +19,25 @@ class Main extends Component {
     var list = local.getLocal('qrcodeList')
     list.map((item) => {
       if (item.acname === acname) {
-        this.setState({
-          qrcodeList: item.qrlist
-        })
+        (
+          async () => {
+            var result = await Promise.all(
+              item.qrlist
+                .map(({ url, prize }) => (
+                  async () => {
+                    var qrurl = await QRcode.toDataURL(url)
+                    return {
+                      prize,
+                      url: qrurl
+                    }
+                  }
+                )())
+            )
+            this.setState({
+              qrcodeList: result
+            })
+          }
+        )()
       }
     })
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import QRcode from 'qrcode'
 import Box from './Box'
 import Fail from './Fail'
 import Save from '../../common/Save'
@@ -14,9 +15,25 @@ class Main extends Component {
     var list = local.getLocal('qrcodeList')
     list.map((item) => {
       if (item.acname === this.acname) {
-        this.setState({
-          qrcodeList: item.qrlist
-        })
+        (
+          async () => {
+            var result = await Promise.all(
+              item.qrlist
+                .map(({ url, prize }) => (
+                  async () => {
+                    var qrurl = await QRcode.toDataURL(url)
+                    return {
+                      prize,
+                      url: qrurl
+                    }
+                  }
+                )())
+            )
+            this.setState({
+              qrcodeList: result
+            })
+          }
+        )()
       }
     })
   }

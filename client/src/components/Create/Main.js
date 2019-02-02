@@ -50,7 +50,7 @@ class Main extends Component {
     var list = local.getLocal('dataList')
     if (list.length) {
       list.map((item) => {
-        if (item.acname === acname) {
+        if (item.acname === acname && item.status === 2) {
           this.setState({
             typelist: item.typelist.map(box => box.mark),
             untypelist: item.untypelist.map(box => box.mark)
