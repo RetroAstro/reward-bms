@@ -138,7 +138,6 @@ export const createAct = async data => {
     }))
   data = JSON.stringify({
     activity: data.acname,
-    acturl: '',
     token: local.getLocal('token'),
     typeA: typeA,
     typeB: typeB

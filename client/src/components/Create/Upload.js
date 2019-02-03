@@ -30,8 +30,22 @@ class Upload extends Component {
       }, mark)
     }
     formatData (data) {
-      console.log(data)
-      return data
+      var defaultArr = [
+        ['学号', 'stuid'],
+        ['学院', 'college'],
+        ['姓名', 'stuname'],
+        ['电话', 'telephone']
+      ]
+      var result = data.map(item => {
+        var obj = {}
+        defaultArr.map(arr => {
+          if (item[arr[0]]) {
+            obj = Object.assign(obj, { [arr[1]]: item[arr[0]] })
+          }
+        })
+        return obj
+      })
+      return result
     }
     readFile = (e) => {
       var file = e.target.files[0]
