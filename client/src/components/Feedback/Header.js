@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import bus from '@utils/bus'
 
 class Header extends Component {
     state = {
       selected: '全部类型'
+    }
+    componentDidUpdate () {
+      bus.emit('watchType', this.state.selected)
     }
     render () {
       var wrap
@@ -13,7 +16,7 @@ class Header extends Component {
           <div className="middle flex-between">
             <div className="left-side flex-start">
               <div className="ac-name flex-center">
-                <span>最美班级墙</span>
+                <span>{this.props.acname}</span>
               </div>
               <div className="slider">
                 <div
@@ -59,4 +62,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header)
+export default Header

@@ -47,7 +47,7 @@ const AcBox = (props) => (
       </div>
       <div
         className="feedback-btn flex-center"
-        onClick={() => props.history.push('/feedback')}
+        onClick={() => props.history.push(`/feedback?acname=${props.acname}&actid=${props.actid}`)}
       >
         <span>信息反馈</span>
       </div>

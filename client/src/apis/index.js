@@ -183,3 +183,63 @@ export const deleteAct = (actid, acname) => {
     })
   })
 }
+
+export const showType = async (actid, page) => {
+  var pagesize = 10
+  var res = await axios({
+    method: 'POST',
+    url: '/accept_prize/showPrizerA',
+    data: createForm({
+      actid,
+      page,
+      pagesize,
+      token: local.getLocal('token')
+    })
+  })
+  var items = res.data.data
+    .map((item, i) => ({
+      number: i + 1,
+      type: '指定类型',
+      stuname: item.stuname,
+      college: item.college,
+      stuid: item.stuid,
+      telephone: item.telephone,
+      reward: item.reward,
+      push_status: 8,
+      reward_status: item.status ? '已领取' : '未领取'
+    }))
+  return {
+    items,
+    total: res.data.total
+  }
+}
+
+export const showUntype = async (actid, page) => {
+  var pagesize = 10
+  var res = await axios({
+    method: 'POST',
+    url: '/accept_prize/showPrizerB',
+    data: createForm({
+      actid,
+      page,
+      pagesize,
+      token: local.getLocal('token')
+    })
+  })
+  var items = res.data.data
+    .map((item, i) => ({
+      number: i + 1,
+      type: '非指定类型',
+      stuname: item.stuname,
+      college: item.college,
+      stuid: item.stuid,
+      telephone: item.telephone,
+      reward: item.reward,
+      push_status: 8,
+      reward_status: item.status
+    }))
+  return {
+    items,
+    total: res.data.total
+  }
+}

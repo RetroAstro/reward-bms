@@ -119,6 +119,30 @@ class Pagination extends Component {
         <span></span>
       </li>
     )
+    if (totalPage <= 5) {
+      var arr = []
+      for (var j = 1; j <= totalPage; j++) {
+        arr.push(
+          <li
+            key={j}
+            className={classNames(
+              'flex-center',
+              { active: currentPage === j }
+            )}
+            onClick={this.pageClick.bind(this, j)}
+          >
+            <span>{j}</span>
+          </li>
+        )
+      }
+      if (totalPage > 3) {
+        var first = pages.shift()
+        var last = pages.pop()
+        arr.unshift(first)
+        arr.push(last)
+      }
+      pages = arr
+    }
     return pages
   }
   render () {
