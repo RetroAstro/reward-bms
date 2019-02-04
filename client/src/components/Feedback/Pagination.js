@@ -5,6 +5,11 @@ class Pagination extends Component {
   state = {
     currentPage: 1
   }
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.currentPage !== this.state.currentPage) {
+      this.props.handleChange(this.state.currentPage)
+    }
+  }
   pageClick (current) {
     this.setState({
       currentPage: current

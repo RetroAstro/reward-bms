@@ -18,7 +18,7 @@ const Feedback = (props) => {
         history={props.history}
       />
       <Feed actid={actid} />
-      <Export />
+      <Export actid={actid} />
     </div>
   )
 }

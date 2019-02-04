@@ -184,8 +184,7 @@ export const deleteAct = (actid, acname) => {
   })
 }
 
-export const showType = async (actid, page) => {
-  var pagesize = 10
+export const showType = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
     url: '/accept_prize/showPrizerA',
@@ -198,15 +197,15 @@ export const showType = async (actid, page) => {
   })
   var items = res.data.data
     .map((item, i) => ({
-      number: i + 1,
-      type: '指定类型',
-      stuname: item.stuname,
-      college: item.college,
-      stuid: item.stuid,
-      telephone: item.telephone,
-      reward: item.reward,
-      push_status: 8,
-      reward_status: item.status ? '已领取' : '未领取'
+      '序号': i + 1,
+      '领奖类型': '指定类型',
+      '姓名': item.stuname,
+      '学院': item.college,
+      '学号': item.stuid,
+      '电话': item.telephone,
+      '奖品名称': item.reward,
+      '推送情况': 8,
+      '领奖情况': item.status ? '已领取' : '未领取'
     }))
   return {
     items,
@@ -214,8 +213,7 @@ export const showType = async (actid, page) => {
   }
 }
 
-export const showUntype = async (actid, page) => {
-  var pagesize = 10
+export const showUntype = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
     url: '/accept_prize/showPrizerB',
@@ -228,15 +226,15 @@ export const showUntype = async (actid, page) => {
   })
   var items = res.data.data
     .map((item, i) => ({
-      number: i + 1,
-      type: '非指定类型',
-      stuname: item.stuname,
-      college: item.college,
-      stuid: item.stuid,
-      telephone: item.telephone,
-      reward: item.reward,
-      push_status: 8,
-      reward_status: item.status
+      '序号': i + 1,
+      '领奖类型': '非指定类型',
+      '姓名': item.stuname,
+      '学院': item.college,
+      '学号': item.stuid,
+      '电话': item.telephone,
+      '奖品名称': item.reward,
+      '推送情况': 8,
+      '领奖情况': item.status ? '已领取' : '未领取'
     }))
   return {
     items,

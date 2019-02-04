@@ -8,6 +8,14 @@ class Header extends Component {
     componentDidUpdate () {
       bus.emit('watchType', this.state.selected)
     }
+    componentDidMount () {
+      bus.on('getType', () => {
+        bus.emit('receiveType', this.state.selected)
+      })
+    }
+    componentWillUnmount () {
+      bus.removeAll('getType')
+    }
     render () {
       var wrap
       var arr = ['全部类型', '指定类型', '非指定类型']
