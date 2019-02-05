@@ -12,6 +12,19 @@ const createForm = data => {
   return form
 }
 
+const shuffle = array => {
+  var t
+  var i
+  var m = array.length
+  while (m) {
+    i = Math.floor(Math.random() * m--)
+    t = array[m]
+    array[m] = array[i]
+    array[i] = t
+  }
+  return array
+}
+
 export const requestLogin = data => {
   var result = hash
     .sha256()
@@ -169,6 +182,16 @@ export const createAct = async data => {
     acturls: acturls
   })
   await instance.post('/accept_prize/addActUrl', sendData)
+  if (res.data.failMsg) {
+    var failMsg = res.data.failMsg
+      .map(item => ({
+        stuname: item.stuname,
+        college: item.college,
+        stuid: item.stuid,
+        telephone: item.telephone
+      }))
+    local.setLocal('failMsg', failMsg)
+  }
   return result
 }
 
@@ -239,5 +262,30 @@ export const showUntype = async (actid, page, pagesize = 10) => {
   return {
     items,
     total: res.data.total
+  }
+}
+
+export const showAll = async (actid, page) => {
+  const SIZE = 10
+  const MAX = 666666
+  var dataOne = await showType(actid, 0, MAX)
+  var dataTwo = await showUntype(actid, 0, MAX)
+  var data = shuffle([...dataOne.items, ...dataTwo.items])
+    .map((item, i) => {
+      item['序号'] = i + 1
+      return item
+    })
+  var total = Math.ceil(data.length / SIZE)
+  var current = page * SIZE
+  if (page) {
+    var result = data
+      .filter((item, i) => current >= data.length ? i + 1 > current - SIZE : i + 1 >= current - 9 && i + 1 <= current)
+    return {
+      total,
+      items: result
+    }
+  }
+  return {
+    items: data
   }
 }

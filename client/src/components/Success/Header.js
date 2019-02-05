@@ -8,7 +8,10 @@ const Header = ({ acname, history }) => (
       </div>
       <div
         className="back flex-center"
-        onClick={() => history.push('/display')}
+        onClick={() => {
+          history.push('/display')
+          setTimeout(() => window.location.reload(), 100)
+        }}
       >
         <span>返回主页</span>
       </div>

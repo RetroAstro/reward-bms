@@ -120,7 +120,7 @@
 
       & .fail-nav {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 40px;
         background: #fafafa;
 
@@ -137,6 +137,21 @@
       & .table-box {
         width: 100%;
         position: relative;
+
+        & .row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: 40px;
+
+          & > div {
+            border-bottom: 1px solid #ebeef5;
+            border-left: 1px solid #ebeef5;
+          }
+
+          & > div:last-child {
+            border-right: 1px solid #ebeef5;
+          }
+        }
       }
     }
 

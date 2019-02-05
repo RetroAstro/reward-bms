@@ -215,6 +215,10 @@
           }
         }
 
+        & > li:first-child {
+          margin-left: 0;
+        }
+
         & .eli {
           border: 0;
 

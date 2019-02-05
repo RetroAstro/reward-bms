@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import Xlsx from 'xlsx'
-import { showType, showUntype } from '../../apis'
+import { showType, showUntype, showAll } from '../../apis'
 import bus from '@utils/bus'
 
 class Export extends Component {
   handleExport () {
     bus.on('receiveType', (type) => {
       bus.removeAll('receiveType')
-      if (type === '全部类型') {
-        alert('功能开发中 😊')
-        return
-      }
       this.fetchData(type)
         .then(({ items }) => {
           items.length ? this.exportExcel(type, items) : alert('没有数据可以导出哦 😊')
@@ -20,9 +16,10 @@ class Export extends Component {
   }
   fetchData (type) {
     const MAX = 666666
+    var actid = this.props.actid
     return type === '指定类型'
-      ? showType(this.props.actid, 0, MAX) : type === '非指定类型'
-        ? showUntype(this.props.actid, 0, MAX) : null
+      ? showType(actid, 0, MAX) : type === '非指定类型'
+        ? showUntype(actid, 0, MAX) : type === '全部类型' ? showAll(actid) : null
   }
   exportExcel (
     filename,
