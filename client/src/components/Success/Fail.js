@@ -4,7 +4,7 @@ import Table from './Table'
 
 const Fail = () => (
   <div className="fail">
-    <div className="mes flex-start">
+    <div className="mes flex-center">
       <span>推送失败信息</span>
     </div>
     <Nav />

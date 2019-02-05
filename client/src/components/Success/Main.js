@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import QRcode from 'qrcode'
 import Box from './Box'
 import Fail from './Fail'
@@ -14,7 +13,7 @@ class Main extends Component {
     this.ref.current.classList.add('active')
     var list = local.getLocal('qrcodeList')
     list.map((item) => {
-      if (item.acname === this.acname) {
+      if (item.acname === this.props.acname) {
         (
           async () => {
             var result = await Promise.all(
@@ -37,10 +36,6 @@ class Main extends Component {
       }
     })
   }
-  componentDidMount () {
-    var params = new URLSearchParams(this.props.location.search)
-    this.acname = params.get('acname')
-  }
   render () {
     this.ref = React.createRef()
     return (
@@ -59,4 +54,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main)
+export default Main

@@ -1,11 +1,10 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 
-const Header = ({ history }) => (
+const Header = ({ acname, history }) => (
   <div className="header flex-center">
     <div className="middle flex-between">
       <div className="ac-name flex-center">
-        <span>最美班级墙</span>
+        <span>{acname}</span>
       </div>
       <div
         className="back flex-center"
@@ -17,4 +16,4 @@ const Header = ({ history }) => (
   </div>
 )
 
-export default withRouter(Header)
+export default Header
