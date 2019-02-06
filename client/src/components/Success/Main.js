@@ -23,7 +23,8 @@ class Main extends Component {
                     var qrurl = await QRcode.toDataURL(url)
                     return {
                       prize,
-                      url: qrurl
+                      url: qrurl,
+                      acname: item.acname
                     }
                   }
                 )())

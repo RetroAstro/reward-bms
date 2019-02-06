@@ -275,9 +275,9 @@ export const showAll = async (actid, page) => {
       item['序号'] = i + 1
       return item
     })
-  var total = Math.ceil(data.length / SIZE)
-  var current = page * SIZE
   if (page) {
+    var total = Math.ceil(data.length / SIZE)
+    var current = page * SIZE
     var result = data
       .filter((item, i) => current >= data.length ? i + 1 > current - SIZE : i + 1 >= current - 9 && i + 1 <= current)
     return {

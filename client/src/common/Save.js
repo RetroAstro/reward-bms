@@ -64,7 +64,7 @@ class Save extends Component {
                     <li
                       key={i}
                       filename={item.prize}
-                      className="photo flex-col-between"
+                      className="photo flex-col-start"
                     >
                       <div className="prize-name flex-center">
                         <span>{item.prize}</span>
@@ -75,6 +75,9 @@ class Save extends Component {
                           style={{ backgroundImage: `url(${item.url})` }}
                         >
                         </div>
+                      </div>
+                      <div className="acname flex-center">
+                        <span>{item.acname}</span>
                       </div>
                     </li>
                   )) : null
