@@ -52,6 +52,12 @@
   justify-content: flex-end;
 }
 
+.flex-col-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .flex-col-between {
   display: flex;
   flex-direction: column;

@@ -3,7 +3,7 @@ import local from '@utils/local'
 
 var wrap
 
-const Header = () => (
+const Header = ({ shared }) => (
   <div className="header flex-center">
     <div className="middle flex-between">
       <div className="orz-name">红岩网校工作站</div>
@@ -15,6 +15,24 @@ const Header = () => (
           type="text"
           className="search-ipt"
           placeholder="请输入活动关键字"
+          onKeyUp={(e) => {
+            var value = e.target.value
+            if (value) {
+              shared.filterBox(value)
+            } else {
+              var list = local.getLocal('dataList')
+              shared
+                .clearAll()
+                .then(() => {
+                  var data = list.map((item) => ({
+                    actid: item.actid,
+                    acname: item.acname,
+                    status: item.status
+                  }))
+                  shared.addBox(data)
+                })
+            }
+          }}
           onBlur={() => wrap.classList.remove('active')}
           onFocus={() => wrap.classList.add('active')}
         />

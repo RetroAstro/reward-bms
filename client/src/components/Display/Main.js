@@ -6,9 +6,6 @@ import AcBox from './AcBox'
 import Save from '../../common/Save'
 import bus from '@utils/bus'
 import local from '@utils/local'
-import AcBoxContainer from '@cont/AcBox'
-
-const sharedAcBoxContainer = new AcBoxContainer()
 
 class Main extends Component {
   state = {
@@ -43,7 +40,7 @@ class Main extends Component {
     })
   }
   showBoxes (list) {
-    var acbox = sharedAcBoxContainer
+    var acbox = this.props.shared
     if (list.length) {
       acbox
         .clearAll()
@@ -71,7 +68,7 @@ class Main extends Component {
       <div className="main">
         <div className="section">
           <div className="sec-row flex-start">
-            <Subscribe to={[sharedAcBoxContainer]}>
+            <Subscribe to={[this.props.shared]}>
               {(acbox) => (
                 acbox.state.acboxlist.length
                   ? acbox.state.acboxlist.map((box, i) => (
