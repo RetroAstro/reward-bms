@@ -1,7 +1,7 @@
 {
-  "name": "awarder",
+  "name": "reward-bms",
   "version": "1.0.0",
-  "description": "award background management system",
+  "description": "reward background management system",
   "author": "RetroAstro",
   "license": "MIT",
   "scripts": {
