@@ -67,6 +67,7 @@ export const fetchtoLocal = async () => {
       typelist: item.typeA.map(item => ({
         mark: item.mark,
         prize_name: item.reward,
+        prize_date: item.prizeDate,
         push_message: item.sendmsg,
         student_list: item.reqStudents,
         type: '指定类型'
@@ -106,6 +107,7 @@ export const saveEdit = data => {
     .map(item => ({
       mark: item.mark,
       reward: item.prize_name,
+      prizeDate: item.prize_date,
       sendmsg: item.push_message,
       reqStudents: item.student_list
     }))
@@ -141,6 +143,7 @@ export const createAct = async data => {
     .map(item => ({
       mark: item.mark,
       reward: item.prize_name,
+      prizeDate: item.prize_date,
       sendmsg: item.push_message,
       reqStudents: item.student_list
     }))
@@ -227,7 +230,7 @@ export const showType = async (actid, page, pagesize = 10) => {
       '学号': item.stuid,
       '电话': item.telephone,
       '奖品名称': item.reward,
-      '推送情况': 8,
+      '推送情况': item.push_status ? '推送失败' : '推送成功',
       '领奖情况': item.status ? '已领取' : '未领取'
     }))
   return {
@@ -256,7 +259,7 @@ export const showUntype = async (actid, page, pagesize = 10) => {
       '学号': item.stuid,
       '电话': item.telephone,
       '奖品名称': item.reward,
-      '推送情况': 8,
+      '推送情况': item.push_status ? '推送成功' : '推送失败',
       '领奖情况': item.status ? '已领取' : '未领取'
     }))
   return {

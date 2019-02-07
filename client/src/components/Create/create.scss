@@ -180,6 +180,56 @@
           }
         }
 
+        & .date-picker {
+          margin-top: 60px;
+
+          & .name {
+            font-size: 17px;
+            margin-right: 50px;
+          }
+
+          & .date {
+            position: relative;
+            width: 150px;
+            height: 35px;
+
+            &::before {
+              display: block;
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              content: '';
+              width: 16px;
+              height: 16px;
+              z-index: 222222;
+              background-image: url('../../assets/time.png');
+              background-size: 100% 100%;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+
+            & input {
+              width: 100%;
+              height: 100%;
+              border-radius: 4px;
+              box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
+              padding: 12px;
+              font-size: 16px;
+              color: rgba(0, 0, 0, 0.65);
+              transition: all 0.3s ease-in-out;
+
+              &:focus {
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $info;
+              }
+
+              &::-webkit-input-placeholder {
+                color: #c1c1c1;
+              }
+            }
+          }
+        }
+
         & .publish {
           margin-top: 60px;
 
