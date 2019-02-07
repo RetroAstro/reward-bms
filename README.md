@@ -18,7 +18,7 @@
 **使用** 
 
 ```js
-$ git clone https://github.com/RetroAstro/welcome-2018-mobile.git (your-project-name)
+$ git clone https://github.com/RetroAstro/rewarder.git (your-project-name)
 
 $ cd your-project-name
 
