@@ -17,7 +17,7 @@
 
 **使用** 
 
-```js
+```
 $ git clone https://github.com/RetroAstro/rewarder.git (your-project-name)
 
 $ cd your-project-name
