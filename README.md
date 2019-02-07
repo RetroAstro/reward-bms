@@ -2,7 +2,7 @@
 
 ![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000) &nbsp; ![code-style-standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)
 
-> ### 一套方便日常活动奖品领取的后台管理系统
+> #### 一套方便日常活动奖品领取的后台管理系统
 
 **技术栈**
 
