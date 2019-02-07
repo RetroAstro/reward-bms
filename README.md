@@ -24,7 +24,7 @@ $ cd your-project-name
 
 $ npm install 
 
-$ npm run dev
+$ npm run start
 ```
 
 测试账号：redrock
