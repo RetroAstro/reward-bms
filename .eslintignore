@@ -1,2 +1,2 @@
-client/dist/**
+dist/**
 node_modules/**
