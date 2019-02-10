@@ -169,7 +169,7 @@ export const createAct = async data => {
     .concat(
       Object.entries(res.data.bactID)
         .map(([key, value]) => ({
-          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://axrsqx.natappfree.cc/getPrizeB/${res.data.actid}/${value}`,
+          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://zblade.top/accept_prize/getPrizeB/${res.data.actid}/${value}`,
           prize: key,
           acname: data.acname,
           type: '非指定类型'
