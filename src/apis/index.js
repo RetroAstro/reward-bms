@@ -186,7 +186,7 @@ export const createAct = async data => {
   })
   await instance.post('/accept_prize/addActUrl', sendData)
   if (res.data.failMsg) {
-    var failMsg = res.data.failMsg
+    var failMsg = res.data.msg
       .map(item => ({
         stuname: item.stuname,
         college: item.college,
