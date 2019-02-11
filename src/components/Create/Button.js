@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 import { createAct } from '../../apis'
 import bus from '@utils/bus'
 import local from '@utils/local'
@@ -8,6 +9,9 @@ class Button extends Component {
   constructor (props) {
     super(props)
     this.ts = ['type', 'untype']
+  }
+  state = {
+    status: ''
   }
   validate () {
     const isRepeat = () => {
@@ -53,17 +57,27 @@ class Button extends Component {
       bus.init()
     } else {
       bus.data.status = 1
-      createAct(bus.data).then(res => this.savetoLocal(res))
+      this.setState({
+        status: 'creating'
+      }, () => {
+        createAct(bus.data).then(res => this.savetoLocal(res))
+      })
     }
   }
   render () {
     return (
       <div className="qr-create flex-center">
         <div
-          className="qr-btn flex-center"
+          className={
+            classNames(
+              'qr-btn',
+              'flex-center',
+              { disabled: this.state.status === 'creating' }
+            )
+          }
           onClick={this.handleCreate}
         >
-          <span>生成二维码</span>
+          <span>{ this.state.status === 'creating' ? '生成中...' : '生成二维码' }</span>
         </div>
       </div>
     )

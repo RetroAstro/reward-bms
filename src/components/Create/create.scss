@@ -292,6 +292,12 @@
         cursor: pointer;
         opacity: 0.6;
 
+        &.disabled {
+          opacity: 1;
+          user-select: none;
+          pointer-events: none;
+        }
+
         &:hover {
           opacity: 1;
         }

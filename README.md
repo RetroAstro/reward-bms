@@ -9,6 +9,7 @@
 * react
 * react-router
 * unstated
+* event-bus
 
 **特点**
 
