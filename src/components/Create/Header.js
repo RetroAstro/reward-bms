@@ -14,6 +14,10 @@ const validate = (bus, list) => {
     alert('该活动已经被创建！')
     return false
   }
+  if (!bus.data.typelist.length && !bus.data.untypelist.length) {
+    alert('请创建奖品类型！')
+    return false
+  }
   return true
 }
 

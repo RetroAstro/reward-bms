@@ -8,7 +8,7 @@ class Nav extends PureComponent {
   render () {
     var acname
     bus.on('save', function () {
-      this.data.acname = acname.value
+      this.data.acname = acname.value.trim()
     })
     bus.on('show', function (data) {
       acname.value = data.acname

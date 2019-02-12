@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import html2canvas from 'html2canvas'
 
 class Save extends Component {
+  state = {
+    generating: false
+  }
   downloadImage (dom, next) {
     var filename = dom.getAttribute('filename')
     var opts = {
@@ -29,12 +32,14 @@ class Save extends Component {
       if (i < middlewares.length) {
         middlewares[i](next)
       } else {
-        this.props.handleClick()
+        this.setState({
+          generating: false
+        }, () => this.props.handleClick('bingo'))
       }
     }
     next()
   }
-  download = () => {
+  download () {
     var photos = document.querySelectorAll('.photo-box .photo')
     var middlewares = []
     photos.forEach(dom => middlewares.push(next => this.downloadImage(dom, next)))
@@ -44,14 +49,23 @@ class Save extends Component {
     return (
       <div
         ref={this.props.myRef}
-        style={{ backgroundColor: '#f4f5f5' }}
         className="shadow-box mask"
+        style={{ backgroundColor: '#f4f5f5' }}
+        onClick={(e) => {
+          if (!e.target.matches('.save-btn, .save-btn *') && !this.state.generating) {
+            this.props.handleClick(e)
+          }
+        }}
       >
         <div className="center">
           <div className="save-box flex-end">
             <div
               className="save-btn flex-center"
-              onClick={this.download}
+              onClick={() => {
+                this.setState({
+                  generating: true
+                }, () => this.download())
+              }}
             >
               <span>一键保存</span>
             </div>

@@ -86,7 +86,14 @@ class Main extends Component {
           <Save
             ref={this.ref}
             qrcodeList={this.state.qrcodeList}
-            handleClick={() => this.ref.current.classList.remove('active')}
+            handleClick={(e) => {
+              if (e.target && !e.target.matches('.photo, .photo *')) {
+                this.ref.current.classList.remove('active')
+              }
+              if (e === 'bingo') {
+                this.ref.current.classList.remove('active')
+              }
+            }}
           />
         </div>
         <div
