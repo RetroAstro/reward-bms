@@ -3,12 +3,15 @@ import { withRouter } from 'react-router-dom'
 import { Subscribe } from 'unstated'
 import QRcode from 'qrcode'
 import AcBox from './AcBox'
+import Modal from './Modal'
+import History from './History'
 import Save from '../../common/Save'
 import bus from '@utils/bus'
 import local from '@utils/local'
 
 class Main extends Component {
   state = {
+    show: false,
     qrcodeList: []
   }
   showQRcodes = (acname) => {
@@ -59,8 +62,44 @@ class Main extends Component {
     this.showBoxes(list)
     bus.on('renderInitialList', list => this.showBoxes(list))
   }
-  componentWillMount () {
+  componentWillUnmount () {
     bus.removeAll('waitData')
+  }
+  showModal = () => {
+    this.setState({
+      show: true
+    })
+  }
+  hideModal = () => {
+    this.setState({
+      show: false
+    })
+  }
+  _renderSave () {
+    return (
+      <Save
+        ref={this.ref}
+        qrcodeList={this.state.qrcodeList}
+        handleClick={(e) => {
+          if (e.target && !e.target.matches('.photo, .photo *')) {
+            this.ref.current.classList.remove('active')
+          }
+          if (e === 'bingo') {
+            this.ref.current.classList.remove('active')
+          }
+        }}
+      />
+    )
+  }
+  _renderModal () {
+    return (
+      <Modal>
+        <History
+          show={this.state.show}
+          hideModal={this.hideModal}
+        />
+      </Modal>
+    )
   }
   render () {
     this.ref = React.createRef()
@@ -79,22 +118,18 @@ class Main extends Component {
                       history={this.props.history}
                       handleClick={this.showQRcodes}
                     />
-                  )) : null
+                  )) : <span className="flex-center">空空如也 ～ 快去创建一个活动吧！</span>
               )}
             </Subscribe>
           </div>
-          <Save
-            ref={this.ref}
-            qrcodeList={this.state.qrcodeList}
-            handleClick={(e) => {
-              if (e.target && !e.target.matches('.photo, .photo *')) {
-                this.ref.current.classList.remove('active')
-              }
-              if (e === 'bingo') {
-                this.ref.current.classList.remove('active')
-              }
-            }}
-          />
+          {this._renderSave()}
+          <div
+            className="history-btn flex-center"
+            onClick={this.showModal}
+          >
+            <span>历史记录</span>
+          </div>
+          {this._renderModal()}
         </div>
         <div
           className="create"

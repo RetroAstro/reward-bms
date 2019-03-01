@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Main from './Main'
-import { fetchtoLocal } from '../../apis'
+import { fetchtoLocal } from '../../api'
 import AcBoxContainer from '@cont/AcBox'
 
 import './display.scss'

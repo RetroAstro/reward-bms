@@ -175,6 +175,23 @@
             }
           }
 
+          & .download-btn {
+            width: 100px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: #40a9ff;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+            letter-spacing: 1px;
+            margin-left: 40px;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+
           & .file-ipt {
             display: none;
           }
@@ -202,7 +219,6 @@
               content: '';
               width: 16px;
               height: 16px;
-              z-index: 222222;
               background-image: url('../../assets/time.png');
               background-size: 100% 100%;
               background-repeat: no-repeat;
@@ -216,7 +232,7 @@
               box-shadow: inset 0 0 4px rgba(102, 175, 233, 0.6);
               padding: 12px;
               font-size: 16px;
-              color: rgba(0, 0, 0, 0.65);
+              color: #c1c1c1;
               transition: all 0.3s ease-in-out;
 
               &:focus {

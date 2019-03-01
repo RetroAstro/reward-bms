@@ -198,13 +198,23 @@ export const createAct = async data => {
   return result
 }
 
-export const deleteAct = (actid, acname) => {
+export const endAct = (actid) => {
   axios({
     method: 'POST',
-    url: '/accept_prize/deleteActivity',
+    url: '/accept_prize/EndActivity',
     data: createForm({
       actid: actid,
-      activity: acname,
+      token: local.getLocal('token')
+    })
+  })
+}
+
+export const deleteTemp = (actid) => {
+  axios({
+    method: 'POST',
+    url: '/accept_prize/deleteTemp',
+    data: createForm({
+      actid: actid,
       token: local.getLocal('token')
     })
   })

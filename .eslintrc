@@ -19,6 +19,7 @@
     "jsx-quotes": "off",
     "react/prop-types": "off",
     "no-unused-vars": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-unused-expressions": "off"
   }
 }

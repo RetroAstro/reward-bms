@@ -1,6 +1,16 @@
 import React from 'react'
 import bus from '@utils/bus'
 
+const getDate = () => {
+  var date = new Date()
+  var m = date.getMonth() + 1
+  var d = date.getDate()
+  var month = m < 10 ? '0' + m : m
+  var day = d < 10 ? '0' + d : d
+  var today = `${date.getFullYear()}-${month}-${day}`
+  return today
+}
+
 const DatePicker = ({ mark }) => {
   function handleChange (e) {
     var value = e.target.value
@@ -11,7 +21,14 @@ const DatePicker = ({ mark }) => {
   }
   var start, end
   bus.on('save', function () {
-    var date = (start.value && end.value) ? `${start.value} ~ ${end.value}` : null
+    var date
+    if (start.value && end.value) {
+      date = `${start.value} ~ ${end.value}`
+    } else if (!start.value && end.value) {
+      date = `${getDate()} ~ ${end.value}`
+    } else {
+      date = null
+    }
     this.emit(mark, {
       prize_date: date
     })
@@ -36,7 +53,7 @@ const DatePicker = ({ mark }) => {
         <input
           type="text"
           className="start-time"
-          placeholder="开始时间"
+          placeholder={getDate()}
           maxLength="10"
           ref={el => { start = el }}
           onChange={(e) => handleChange(e)}

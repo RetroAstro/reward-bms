@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Xlsx from 'xlsx'
-import { showType, showUntype, showAll } from '../../apis'
+import { showType, showUntype, showAll } from '../../api'
 import bus from '@utils/bus'
 
 class Export extends Component {

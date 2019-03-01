@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
-import { createAct } from '../../apis'
+import { createAct } from '../../api'
 import bus from '@utils/bus'
 import local from '@utils/local'
 

@@ -8,15 +8,10 @@ const DynamicRoute = route => (
   <Route
     exact
     path={route.path}
-    render={props =>
-      props.location.pathname !== '/' && !Auth()
-        ? <Redirect
-          to={{
-            pathname: '/',
-            state: { from: props.location }
-          }}
-        /> : <route.component {...props} routes={route.routes} />
-    }
+    render={({ location, ...rest }) => (
+      location.pathname !== '/' && !Auth()
+        ? <Redirect to='/' /> : <route.component {...rest} />
+    )}
   />
 )
 

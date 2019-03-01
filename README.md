@@ -8,6 +8,7 @@
 
 * react
 * react-router
+* react-spring
 * unstated
 * event-bus
 

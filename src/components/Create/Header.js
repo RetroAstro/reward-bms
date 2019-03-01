@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { saveEdit } from '../../apis'
+import { saveEdit } from '../../api'
 import bus from '@utils/bus'
 import local from '@utils/local'
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import Table from './Table'
 import Pagination from './Pagination'
-import { showType, showUntype, showAll } from '../../apis'
+import { showType, showUntype, showAll } from '../../api'
 import bus from '@utils/bus'
 
 class Feed extends Component {

@@ -21,11 +21,15 @@ class Submit extends Component {
   componentWillUnmount () {
     window.onkeyup = null
   }
-  componentDidUpdate () {
+  async componentDidUpdate () {
     var { submit, history } = this.props
-    if ((submit.state.status === 0 || submit.state.status === 1) && this.state.status) {
-      submit.reset()
+    if (submit.state.status === 0 && this.state.status) {
+      await submit.reset()
       history.push('/display')
+    }
+    if (submit.state.status === 1 && this.state.status) {
+      await submit.reset()
+      alert('该用户已登录，请稍后再试！')
     }
   }
   render () {
@@ -39,7 +43,8 @@ class Submit extends Component {
           className="orz"
           type="text"
           placeholder="请输入组织名称"
-          onFocus={() => {
+          onFocus={async () => {
+            await submit.reset()
             this.orz_err.classList.remove('active')
             this.setState({ status: false })
           }}
@@ -49,7 +54,8 @@ class Submit extends Component {
           className="psw"
           type="text"
           placeholder="请输入密码"
-          onFocus={() => {
+          onFocus={async () => {
+            await submit.reset()
             this.psw_err.classList.remove('active')
             this.setState({ status: false })
           }}
@@ -64,9 +70,9 @@ class Submit extends Component {
             classNames(
               'login-failed',
               { show: this.state.status },
-              { active: submit.state.status === 415 }
+              { active: submit.state.status === -3 || submit.state.status === -4 }
             )
-          }>组织名称或密码有误!</div>
+          }>{submit.state.status === -3 ? '组织名称不存在！' : submit.state.status === -4 ? '密码输入错误！' : null}</div>
       </div>
     </>
     )

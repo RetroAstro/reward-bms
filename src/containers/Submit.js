@@ -1,24 +1,22 @@
 import { Container } from 'unstated'
-import { requestLogin } from '../apis'
+import { requestLogin } from '../api'
 import local from '@utils/local'
 
 class SubmitContainer extends Container {
   state = {
     status: ''
   }
-  reset () {
-    this.setState({ status: '' })
+  reset = async () => {
+    await this.setState({ status: '' })
   }
-  login (data) {
-    requestLogin(data)
-      .then(res => {
-        var status = res.data.status
-        if (status !== 415) {
-          document.cookie = 'isLogined=1'
-          local.setLocal('token', res.data.token)
-        }
-        this.setState({ status: status })
-      })
+  async login (data) {
+    var res = await requestLogin(data)
+    var status = res.data.status
+    if (status === 0) {
+      document.cookie = 'isLogined=1'
+      local.setLocal('token', res.data.token)
+    }
+    await this.setState({ status })
   }
 }
 

@@ -89,6 +89,20 @@ class Upload extends Component {
           >
             <span>{this.state.status}</span>
           </div>
+          <div
+            className="download-btn flex-center"
+            onClick={() => this.example.click()}
+          >
+            <span>下载范例</span>
+          </div>
+          <a
+            ref={el => { this.example = el }}
+            href="http://zblade.top/accept_prize/file/standard.xlsx"
+            download="上传名单范例"
+            style={{
+              display: 'none'
+            }}
+          />
           <input
             type="file"
             onChange={this.readFile}
