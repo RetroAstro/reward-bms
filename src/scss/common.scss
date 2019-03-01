@@ -89,6 +89,46 @@
   background-position: center center;
 }
 
+#modal-root {
+  & .close-btn {
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: rgba(0, 21, 41, 0.12) 0 5px 10px;
+    }
+  }
+
+  & .container {
+    & li {
+      box-shadow: 3px 0 4px -4px rgba(0, 21, 41, 0.18), -3px 0 4px -4px rgba(0, 21, 41, 0.18);
+      transition: all 0.3s ease-in-out;
+      background: #fff;
+
+      &:hover {
+        background: rgba(232, 249, 255, 0.8);
+      }
+
+      & .del-btn {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    & li:first-child {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      box-shadow: 3px 0 4px -4px rgba(0, 21, 41, 0.18), -3px 0 4px -4px rgba(0, 21, 41, 0.18), 0 -5px 1px -5px rgba(0, 21, 41, 0.2);
+    }
+
+    & li:last-child {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      box-shadow: 3px 0 4px -4px rgba(0, 21, 41, 0.18), -3px 0 4px -4px rgba(0, 21, 41, 0.18), 0 5px 1px -5px rgba(0, 21, 41, 0.2);
+    }
+  }
+}
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
