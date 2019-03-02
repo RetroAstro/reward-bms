@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Spring, animated } from 'react-spring/renderprops'
 import { deleteAct } from '../../api'
@@ -42,7 +42,7 @@ const Closer = ({ children }) => (
   </Spring>
 )
 
-class History extends Component {
+class History extends PureComponent {
   state = {
     items: []
   }
