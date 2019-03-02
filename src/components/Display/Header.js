@@ -1,4 +1,5 @@
 import React from 'react'
+import { loginOut } from '../../api'
 import local from '@utils/local'
 
 var wrap
@@ -42,7 +43,8 @@ const Header = ({ shared }) => (
       </div>
       <div
         className="sign-out-btn flex-center"
-        onClick={() => {
+        onClick={async () => {
+          await loginOut()
           var exp = new Date()
           exp.setTime(exp.getTime() - 1)
           document.cookie = `isLogined='';expires=${exp.toGMTString()}`

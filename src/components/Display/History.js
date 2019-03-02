@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Spring, animated } from 'react-spring/renderprops'
+import { deleteAct } from '../../api'
+import local from '@utils/local'
 
 const Slider = ({ show, children }) => (
   <Spring
@@ -22,64 +24,83 @@ const Slider = ({ show, children }) => (
   </Spring>
 )
 
+const Closer = ({ children }) => (
+  <Spring
+    native
+    force
+    to={{ height: 'auto' }}
+  >
+    {
+      props => (
+        <animated.div style={{
+          ...styles.wrap,
+          ...props
+        }}>{children}</animated.div>
+      )
+    }
+  </Spring>
+)
+
 export default class History extends Component {
-  _renderContainer () {
-    return (
-      <div
-        style={styles.container}
-        className="container"
-      >
-        <ul style={styles.ul}>
-          <li
-            style={styles.box}
-            className="flex-between"
-          >
-            <div className="flex-center">
-              <span>最美班级墙</span>
-            </div>
-            <div className="del-btn flex-center">
-              <i
-                style={styles.icon}
-                className="bg-cover-all"
-              ></i>
-            </div>
-          </li>
-          <li
-            style={styles.box}
-            className="flex-between"
-          >
-            <div className="flex-center">
-              <span>拉拉队大比拼</span>
-            </div>
-            <div className="del-btn flex-center">
-              <i
-                style={styles.icon}
-                className="bg-cover-all"
-              ></i>
-            </div>
-          </li>
-        </ul>
-      </div>
-    )
+  state = {
+    items: []
   }
-  _renderButton () {
-    return (
-      <div
-        style={styles.close}
-        className="close-btn flex-center"
-        onClick={() => this.props.hideModal()}
-      >
-        <span>返回主页</span>
-      </div>
-    )
+  onDelete ({ actid, acname }) {
+    deleteAct(actid)
+    var items = this.state.items.filter(item => acname !== item.acname)
+    local.setLocal('historyList', items)
+    this.setState({ items })
+  }
+  componentDidUpdate (prevProps) {
+    if (!prevProps.show) {
+      var items = local.getLocal('historyList')
+      this.setState({ items })
+    }
   }
   render () {
+    const { items } = this.state
     return (
       <Slider
         {...this.props}
       >
-        {this._renderContainer()}
-        {this._renderButton()}
+        <div
+          style={styles.container}
+          className="container"
+        >
+          <Closer>
+            {
+              items.length ? (
+                items.map((item, i) => (
+                  <li
+                    key={i}
+                    style={styles.box}
+                    className="flex-between"
+                  >
+                    <div className="flex-center">
+                      <span>{item.acname}</span>
+                    </div>
+                    <div
+                      className="del-btn flex-center"
+                      onClick={() => this.onDelete(item)}
+                    >
+                      <i
+                        style={styles.icon}
+                        className="bg-cover-all"
+                      ></i>
+                    </div>
+                  </li>
+                ))
+              ) : <span className="flex-center">暂时还没有历史活动出现呢 ～</span>
+            }
+          </Closer>
+        </div>
+        <div
+          style={styles.close}
+          className="close-btn flex-center"
+          onClick={() => this.props.hideModal()}
+        >
+          <span>返回主页</span>
+        </div>
       </Slider>
     )
   }
@@ -119,9 +140,10 @@ const styles = {
     paddingRight: '12px',
     cursor: 'pointer'
   },
-  ul: {
+  wrap: {
     position: 'relative',
-    marginTop: '50px'
+    marginTop: '50px',
+    overflow: 'hidden'
   },
   icon: {
     width: '18px',

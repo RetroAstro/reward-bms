@@ -8,4 +8,6 @@ local.setLocal('dataList', [])
 
 local.setLocal('qrcodeList', [])
 
+local.setLocal('historyList', [])
+
 export default local

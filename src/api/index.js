@@ -40,6 +40,16 @@ export const requestLogin = data => {
   })
 }
 
+export const loginOut = () => {
+  return axios({
+    method: 'POST',
+    url: '/accept_prize/loginOut',
+    data: createForm({
+      token: local.getLocal('token')
+    })
+  })
+}
+
 export const fetchtoLocal = async () => {
   var token = local.getLocal('token')
   var form = createForm({
@@ -97,9 +107,15 @@ export const fetchtoLocal = async () => {
           status: item.status
         }))
     )
+  var ends = res.data.data.filter(item => item.status === 3)
+  var historyData = ends.map(item => ({
+    actid: item.actid,
+    acname: item.actname
+  }))
   local.setLocal('dataList', listData)
   local.setLocal('qrcodeList', qrData)
-  bus.emit('renderInitialList', listData)
+  local.setLocal('historyList', historyData)
+  bus.emit('renderInitialdataList', listData)
 }
 
 export const saveEdit = data => {
@@ -215,6 +231,17 @@ export const deleteTemp = (actid) => {
     url: '/accept_prize/deleteTemp',
     data: createForm({
       actid: actid,
+      token: local.getLocal('token')
+    })
+  })
+}
+
+export const deleteAct = (actid) => {
+  axios({
+    method: 'POST',
+    url: '/accept_prize/deleteActivity',
+    data: createForm({
+      actid,
       token: local.getLocal('token')
     })
   })

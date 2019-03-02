@@ -60,7 +60,7 @@ class Main extends Component {
   componentDidMount () {
     var list = local.getLocal('dataList')
     this.showBoxes(list)
-    bus.on('renderInitialList', list => this.showBoxes(list))
+    bus.on('renderInitialdataList', list => this.showBoxes(list))
   }
   componentWillUnmount () {
     bus.removeAll('waitData')

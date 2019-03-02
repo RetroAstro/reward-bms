@@ -9,7 +9,14 @@ const handleActivity = ({ actid, acname, acbox, status }) => {
   qrcodelist = qrcodelist.filter(item => item.acname !== acname)
   local.setLocal('dataList', datalist)
   local.setLocal('qrcodeList', qrcodelist)
-  status === 2 ? deleteTemp(actid) : status === 1 ? endAct(actid) : null
+  if (status === 2) {
+    deleteTemp(actid)
+  }
+  if (status === 1) {
+    endAct(actid)
+    var historylist = local.getLocal('historyList')
+    local.setLocal('historyList', [...historylist, { actid, acname }])
+  }
   acbox.deleteBox(acname)
 }
 
