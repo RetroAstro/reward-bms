@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Spring, animated } from 'react-spring/renderprops'
 import { deleteAct } from '../../api'
 import local from '@utils/local'
@@ -41,7 +42,7 @@ const Closer = ({ children }) => (
   </Spring>
 )
 
-export default class History extends Component {
+class History extends Component {
   state = {
     items: []
   }
@@ -67,7 +68,7 @@ export default class History extends Component {
           style={styles.container}
           className="container"
         >
-          <Closer>
+          <ul style={styles.wrap}>
             {
               items.length ? (
                 items.map((item, i) => (
@@ -75,13 +76,19 @@ export default class History extends Component {
                     key={i}
                     style={styles.box}
                     className="flex-between"
+                    onClick={(e) => {
+                      if (e.target && e.target.matches('.del-btn, .del-btn *')) {
+                        this.onDelete(item)
+                      } else {
+                        this.props.history.push(`/feedback?acname=${item.acname}&actid=${item.actid}`)
+                      }
+                    }}
                   >
                     <div className="flex-center">
                       <span>{item.acname}</span>
                     </div>
                     <div
                       className="del-btn flex-center"
-                      onClick={() => this.onDelete(item)}
                     >
                       <i
                         style={styles.icon}
@@ -92,7 +99,7 @@ export default class History extends Component {
                 ))
               ) : <span className="flex-center">暂时还没有历史活动出现呢 ～</span>
             }
-          </Closer>
+          </ul>
         </div>
         <div
           style={styles.close}
@@ -105,6 +112,8 @@ export default class History extends Component {
     )
   }
 }
+
+export default withRouter(History)
 
 const styles = {
   history: {

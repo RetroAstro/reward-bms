@@ -13,7 +13,6 @@ const Feedback = (props) => {
   return (
     <div className="feedback">
       <Header
-        actid={actid}
         acname={acname}
         history={props.history}
       />
