@@ -113,8 +113,6 @@ class History extends Component {
   }
 }
 
-export default withRouter(History)
-
 const styles = {
   history: {
     position: 'fixed',
@@ -160,3 +158,5 @@ const styles = {
     backgroundImage: `url(${require('../../assets/close.png')})`
   }
 }
+
+export default withRouter(History)
