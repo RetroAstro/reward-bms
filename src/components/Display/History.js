@@ -25,23 +25,6 @@ const Slider = ({ show, children }) => (
   </Spring>
 )
 
-const Closer = ({ children }) => (
-  <Spring
-    native
-    force
-    to={{ height: 'auto' }}
-  >
-    {
-      props => (
-        <animated.div style={{
-          ...styles.wrap,
-          ...props
-        }}>{children}</animated.div>
-      )
-    }
-  </Spring>
-)
-
 class History extends PureComponent {
   state = {
     items: []
