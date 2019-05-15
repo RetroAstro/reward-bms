@@ -20,11 +20,11 @@
 * 通过微信推送领奖通知信息
 * 生成领奖二维码方便线下扫码领取奖品
 
+[体验地址](http://zblade.top/dist/index.html)
+
 测试账号：redrock
 
 测试密码：123456
-
-[体验地址](http://zblade.top/dist/index.html)
 
 **后端支持  [@bladedragon](https://github.com/bladedragon)**
 
