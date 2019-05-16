@@ -21,8 +21,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     disableHostCheck: true,
     // historyApiFallback: true,
     proxy: {
-      '/accept_prize': {
-        target: 'http://zblade.top:8080'
+      '/234/prizetool': {
+        target: 'https://wx.idsbllp.cn',
+        secure: false
       }
     }
   },

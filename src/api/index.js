@@ -5,10 +5,10 @@ import local from '@utils/local'
 
 const createForm = data => {
   var form = new FormData()
+
   Object.entries(data)
-    .map(([key, value]) => {
-      form.append(key, value)
-    })
+    .map(([key, value]) => form.append(key, value))
+
   return form
 }
 
@@ -16,26 +16,29 @@ const shuffle = array => {
   var t
   var i
   var m = array.length
+
   while (m) {
     i = Math.floor(Math.random() * m--)
     t = array[m]
     array[m] = array[i]
     array[i] = t
   }
+
   return array
 }
 
-export const requestLogin = data => {
-  var result = hash
+export const requestLogin = ({ username, password }) => {
+  var encode = hash
     .sha256()
-    .update('redrock' + data.password)
+    .update('redrock' + password)
     .digest('hex')
+
   return axios({
     method: 'POST',
-    url: '/accept_prize/login',
+    url: '/234/prizetool/login',
     data: createForm({
-      username: data.username,
-      password: result
+      username,
+      password: encode
     })
   })
 }
@@ -43,7 +46,7 @@ export const requestLogin = data => {
 export const loginOut = () => {
   return axios({
     method: 'POST',
-    url: '/accept_prize/loginOut',
+    url: '/234/prizetool/loginOut',
     data: createForm({
       token: local.getLocal('token')
     })
@@ -57,15 +60,13 @@ export const fetchtoLocal = async () => {
     pagesize: 5,
     token: token
   })
-  var res = await axios.post('/accept_prize/showActivity', form)
+  var res = await axios.post('/234/prizetool/showActivity', form)
   var items = res.data.data.filter(item => item.status === 2)
   var result = await Promise.all(
     items.map(async ({ actid }) => {
       var res = await axios
-        .post('/accept_prize/showTemp', createForm({
-          actid: actid,
-          token: token
-        }))
+        .post('/234/prizetool/showTemp', createForm({ actid, token }))
+
       return { ...res.data.data, actid }
     })
   )
@@ -112,6 +113,7 @@ export const fetchtoLocal = async () => {
     actid: item.actid,
     acname: item.actname
   }))
+
   local.setLocal('dataList', listData)
   local.setLocal('qrcodeList', qrData)
   local.setLocal('historyList', historyData)
@@ -139,13 +141,14 @@ export const saveEdit = data => {
     typeA: typeA,
     typeB: typeB
   })
+
   axios({
     method: 'POST',
-    url: '/accept_prize/tempAct',
+    url: '/234/prizetool/tempAct',
     headers: {
       'Content-Type': 'application/json'
     },
-    data: data
+    data
   })
 }
 
@@ -171,13 +174,13 @@ export const createAct = async data => {
   data = JSON.stringify({
     activity: data.acname,
     token: local.getLocal('token'),
-    typeA: typeA,
-    typeB: typeB
+    typeA,
+    typeB
   })
-  var res = await instance.post('/accept_prize/specifiedAct', data)
+  var res = await instance.post('/234/prizetool/specifiedAct', data)
   var result = Object.entries(res.data.aactID)
     .map(([key, value]) => ({
-      url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://zblade.top/accept_prize/getPrizeA/${res.data.actid}/${value}`,
+      url: `https://wx.idsbllp.cn/game/api/index.php?redirect=https://wx.idsbllp.cn/234/prizetool/getPrizeA/${res.data.actid}/${value}`,
       prize: key,
       acname: data.acname,
       type: '指定类型'
@@ -185,7 +188,7 @@ export const createAct = async data => {
     .concat(
       Object.entries(res.data.bactID)
         .map(([key, value]) => ({
-          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=http://zblade.top/accept_prize/getPrizeB/${res.data.actid}/${value}`,
+          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=https://wx.idsbllp.cn/234/prizetool/getPrizeB/${res.data.actid}/${value}`,
           prize: key,
           acname: data.acname,
           type: '非指定类型'
@@ -200,7 +203,9 @@ export const createAct = async data => {
     actid: res.data.actid,
     acturls: acturls
   })
-  await instance.post('/accept_prize/addActUrl', sendData)
+
+  await instance.post('/234/prizetool/addActUrl', sendData)
+
   if (res.data.msg) {
     var failMsg = res.data.msg
       .map(item => ({
@@ -209,15 +214,17 @@ export const createAct = async data => {
         stuid: item.stuid,
         telephone: item.telephone
       }))
+
     local.setLocal('failMsg', failMsg)
   }
+
   return result
 }
 
 export const endAct = (actid) => {
   axios({
     method: 'POST',
-    url: '/accept_prize/EndActivity',
+    url: '/234/prizetool/EndActivity',
     data: createForm({
       actid: actid,
       token: local.getLocal('token')
@@ -228,7 +235,7 @@ export const endAct = (actid) => {
 export const deleteTemp = (actid) => {
   axios({
     method: 'POST',
-    url: '/accept_prize/deleteTemp',
+    url: '/234/prizetool/deleteTemp',
     data: createForm({
       actid: actid,
       token: local.getLocal('token')
@@ -239,7 +246,7 @@ export const deleteTemp = (actid) => {
 export const deleteAct = (actid) => {
   axios({
     method: 'POST',
-    url: '/accept_prize/deleteActivity',
+    url: '/234/prizetool/deleteActivity',
     data: createForm({
       actid,
       token: local.getLocal('token')
@@ -250,7 +257,7 @@ export const deleteAct = (actid) => {
 export const showType = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
-    url: '/accept_prize/showPrizerA',
+    url: '/234/prizetool/showPrizerA',
     data: createForm({
       actid,
       page,
@@ -270,6 +277,7 @@ export const showType = async (actid, page, pagesize = 10) => {
       '推送情况': item.push_status ? '推送失败' : '推送成功',
       '领奖情况': item.status ? '已领取' : '未领取'
     }))
+
   return {
     items,
     total: res.data.total
@@ -279,7 +287,7 @@ export const showType = async (actid, page, pagesize = 10) => {
 export const showUntype = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
-    url: '/accept_prize/showPrizerB',
+    url: '/234/prizetool/showPrizerB',
     data: createForm({
       actid,
       page,
@@ -299,6 +307,7 @@ export const showUntype = async (actid, page, pagesize = 10) => {
       '推送情况': item.push_status ? '推送成功' : '推送失败',
       '领奖情况': item.status ? '已领取' : '未领取'
     }))
+
   return {
     items,
     total: res.data.total
@@ -315,16 +324,19 @@ export const showAll = async (actid, page) => {
       item['序号'] = i + 1
       return item
     })
+
   if (page) {
     var total = Math.ceil(data.length / SIZE)
     var current = page * SIZE
     var result = data
       .filter((item, i) => current >= data.length ? i + 1 > current - SIZE : i + 1 >= current - 9 && i + 1 <= current)
+
     return {
       total,
       items: result
     }
   }
+
   return {
     items: data
   }
