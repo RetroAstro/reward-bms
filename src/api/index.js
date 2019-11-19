@@ -35,7 +35,7 @@ export const requestLogin = ({ username, password }) => {
 
   return axios({
     method: 'POST',
-    url: '/234/prizetool/login',
+    url: '/prizetool/login',
     data: createForm({
       username,
       password: encode
@@ -46,7 +46,7 @@ export const requestLogin = ({ username, password }) => {
 export const loginOut = () => {
   return axios({
     method: 'POST',
-    url: '/234/prizetool/loginOut',
+    url: '/prizetool/loginOut',
     data: createForm({
       token: local.getLocal('token')
     })
@@ -60,12 +60,12 @@ export const fetchtoLocal = async () => {
     pagesize: 5,
     token: token
   })
-  var res = await axios.post('/234/prizetool/showActivity', form)
+  var res = await axios.post('/prizetool/showActivity', form)
   var items = res.data.data.filter(item => item.status === 2)
   var result = await Promise.all(
     items.map(async ({ actid }) => {
       var res = await axios
-        .post('/234/prizetool/showTemp', createForm({ actid, token }))
+        .post('/prizetool/showTemp', createForm({ actid, token }))
 
       return { ...res.data.data, actid }
     })
@@ -144,7 +144,7 @@ export const saveEdit = data => {
 
   axios({
     method: 'POST',
-    url: '/234/prizetool/tempAct',
+    url: '/prizetool/tempAct',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -177,10 +177,10 @@ export const createAct = async data => {
     typeA,
     typeB
   })
-  var res = await instance.post('/234/prizetool/specifiedAct', data)
+  var res = await instance.post('/prizetool/specifiedAct', data)
   var result = Object.entries(res.data.aactID)
     .map(([key, value]) => ({
-      url: `https://wx.idsbllp.cn/game/api/index.php?redirect=https://wx.idsbllp.cn/234/prizetool/getPrizeA/${res.data.actid}/${value}`,
+      url: `https://wx.redrock.team/game/api/index.php?redirect=http://api-234.redrock.team/prizetool/getPrizeA/${res.data.actid}/${value}`,
       prize: key,
       acname: data.acname,
       type: '指定类型'
@@ -188,7 +188,7 @@ export const createAct = async data => {
     .concat(
       Object.entries(res.data.bactID)
         .map(([key, value]) => ({
-          url: `https://wx.idsbllp.cn/game/api/index.php?redirect=https://wx.idsbllp.cn/234/prizetool/getPrizeB/${res.data.actid}/${value}`,
+          url: `https://wx.redrock.team/game/api/index.php?redirect=http://api-234.redrock.team/prizetool/getPrizeB/${res.data.actid}/${value}`,
           prize: key,
           acname: data.acname,
           type: '非指定类型'
@@ -204,7 +204,7 @@ export const createAct = async data => {
     acturls: acturls
   })
 
-  await instance.post('/234/prizetool/addActUrl', sendData)
+  await instance.post('/prizetool/addActUrl', sendData)
 
   if (res.data.msg) {
     var failMsg = res.data.msg
@@ -224,7 +224,7 @@ export const createAct = async data => {
 export const endAct = (actid) => {
   axios({
     method: 'POST',
-    url: '/234/prizetool/EndActivity',
+    url: '/prizetool/EndActivity',
     data: createForm({
       actid: actid,
       token: local.getLocal('token')
@@ -235,7 +235,7 @@ export const endAct = (actid) => {
 export const deleteTemp = (actid) => {
   axios({
     method: 'POST',
-    url: '/234/prizetool/deleteTemp',
+    url: '/prizetool/deleteTemp',
     data: createForm({
       actid: actid,
       token: local.getLocal('token')
@@ -246,7 +246,7 @@ export const deleteTemp = (actid) => {
 export const deleteAct = (actid) => {
   axios({
     method: 'POST',
-    url: '/234/prizetool/deleteActivity',
+    url: '/prizetool/deleteActivity',
     data: createForm({
       actid,
       token: local.getLocal('token')
@@ -257,7 +257,7 @@ export const deleteAct = (actid) => {
 export const showType = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
-    url: '/234/prizetool/showPrizerA',
+    url: '/prizetool/showPrizerA',
     data: createForm({
       actid,
       page,
@@ -287,7 +287,7 @@ export const showType = async (actid, page, pagesize = 10) => {
 export const showUntype = async (actid, page, pagesize = 10) => {
   var res = await axios({
     method: 'POST',
-    url: '/234/prizetool/showPrizerB',
+    url: '/prizetool/showPrizerB',
     data: createForm({
       actid,
       page,

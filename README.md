@@ -22,7 +22,7 @@
 
 **使用**
 
-[体验地址](https://wx.idsbllp.cn/234/prizetool/dist/index.html)
+[体验地址](http://api-234.redrock.team/prizetool/dist/index.html)
 
 测试账号 💭 xc
 

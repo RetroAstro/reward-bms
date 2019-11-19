@@ -21,10 +21,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     disableHostCheck: true,
     // historyApiFallback: true,
     proxy: {
-      '/234/prizetool': {
-        target: 'https://wx.idsbllp.cn',
-        secure: false
-      }
+      '/prizetool': 'http://api-234.redrock.team'
     }
   },
   plugins: [

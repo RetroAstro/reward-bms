@@ -7,7 +7,7 @@ var wrap
 const Header = ({ shared }) => (
   <div className="header flex-center">
     <div className="middle flex-between">
-      <div className="orz-name">红岩网校工作站</div>
+      <div className="orz-name">领奖工具后台管理系统</div>
       <div
         ref={el => { wrap = el }}
         className="search-wrap flex-between"

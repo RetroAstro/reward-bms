@@ -97,7 +97,7 @@ class Upload extends Component {
           </div>
           <a
             ref={el => { this.example = el }}
-            href="http://zblade.top/accept_prize/file/standard.xlsx"
+            href="http://api-234.redrock.team/prizetool/file/standard.xlsx"
             download="上传名单范例"
             style={{
               display: 'none'
